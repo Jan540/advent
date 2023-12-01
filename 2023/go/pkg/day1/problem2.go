@@ -18,7 +18,7 @@ func SolveProblem2(lines []string) string {
 	for _, line := range lines {
 		var digitIndices DigitIndices
 
-		for i, number := range numbers {
+		for _, number := range numbers {
 			firstIdx := strings.Index(line, number)
 			lastIdx := strings.LastIndex(line, number)
 
@@ -27,26 +27,12 @@ func SolveProblem2(lines []string) string {
 			}
 
 			if digitIndices.first == "" || firstIdx < digitIndices.firstIdx {
-				_, err := strconv.Atoi(number)
-
-				if err == nil {
-					digitIndices.first = number
-				} else {
-					digitIndices.first = fmt.Sprint(i + 1)
-				}
-
+				digitIndices.first = getNumber(number)
 				digitIndices.firstIdx = firstIdx
 			}
 
 			if digitIndices.last == "" || lastIdx > digitIndices.lastIdx {
-				_, err := strconv.Atoi(number)
-
-				if err == nil {
-					digitIndices.last = number
-				} else {
-					digitIndices.last = fmt.Sprint(i + 1)
-				}
-
+				digitIndices.last = getNumber(number)
 				digitIndices.lastIdx = lastIdx
 			}
 		}
@@ -56,4 +42,29 @@ func SolveProblem2(lines []string) string {
 	}
 
 	return fmt.Sprint(sum)
+}
+
+func getNumber(number string) string {
+	switch number {
+	case "one":
+		return "1"
+	case "two":
+		return "2"
+	case "three":
+		return "3"
+	case "four":
+		return "4"
+	case "five":
+		return "5"
+	case "six":
+		return "6"
+	case "seven":
+		return "7"
+	case "eight":
+		return "8"
+	case "nine":
+		return "9"
+	default:
+		return number
+	}
 }
