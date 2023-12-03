@@ -8,6 +8,7 @@ import (
 
 	"advent/pkg/day1"
 	"advent/pkg/day2"
+	"advent/pkg/day3"
 )
 
 func main() {
@@ -23,29 +24,32 @@ func main() {
 
 	lines := strings.Split(string(file), "\n")
 
-	result := ""
+	result := "Problem doesn't exist"
 
+	fmt.Printf("Solving day %d, problem %d\n", *dayPtr, *problemPtr)
 	switch *dayPtr {
 	case 1:
 		switch *problemPtr {
 		case 1:
-			fmt.Println("Solving day 1, problem 1")
 			result = day1.SolveProblem1(lines)
 		case 2:
-			fmt.Println("Solving day 1, problem 2")
 			result = day1.SolveProblem2(lines)
-		default:
-			result = "Invalid problem number"
 		}
 
 	case 2:
 		switch *problemPtr {
 		case 1:
-			fmt.Println("Solving day 2, problem 1")
 			result = day2.SolveProblem1(lines)
 		case 2:
-			fmt.Println("Solving day 2, problem 2")
 			result = day2.SolveProblem2(lines)
+		}
+
+	case 3:
+		switch *problemPtr {
+		case 1:
+			result = day3.SolveProblem1(lines)
+		case 2:
+			result = day3.SolveProblem2(lines)
 		}
 	default:
 		result = "Invalid day number"

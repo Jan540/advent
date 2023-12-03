@@ -10,7 +10,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "${fileDirname}",
-            "args": ["-day=2", "-problem=1"]
+            "args": ["-day=3", "-problem=2"]
         }
     ]
 }
