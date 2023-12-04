@@ -29,6 +29,11 @@ fn main() {
             2 => day3::problem2::solve(lines),
             _ => panic!("Invalid problem number :("),
         },
+        4 => match problem {
+            1 => day4::problem1::solve(lines),
+            2 => day4::problem2::solve(lines),
+            _ => panic!("Invalid problem number :("),
+        },
         _ => panic!("Invalid day number :("),
     };
 
