@@ -9,6 +9,7 @@ import (
 	"advent/pkg/day1"
 	"advent/pkg/day2"
 	"advent/pkg/day3"
+	"advent/pkg/day4"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 	problemPtr := flag.Int("problem", 1, "problem to run")
 	flag.Parse()
 
-	file, err := os.ReadFile(fmt.Sprintf("/home/jan/advent/2023/go/in/day%d.in", *dayPtr))
+	file, err := os.ReadFile(fmt.Sprintf("/home/jan/Documents/projects/advent/2023/go/in/day%d.in", *dayPtr))
 
 	if err != nil {
 		panic(err)
@@ -50,6 +51,13 @@ func main() {
 			result = day3.SolveProblem1(lines)
 		case 2:
 			result = day3.SolveProblem2(lines)
+		}
+	case 4:
+		switch *problemPtr {
+		case 1:
+			result = day4.SolveProblem1(lines)
+		case 2:
+			result = day4.SolveProblem2(lines)
 		}
 	default:
 		result = "Invalid day number"
