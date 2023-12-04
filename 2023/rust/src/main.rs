@@ -1,6 +1,7 @@
 use std::fs;
 
 mod day3;
+mod day4;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();

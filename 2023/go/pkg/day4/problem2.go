@@ -11,41 +11,28 @@ func SolveProblem2(lines []string) string {
 	sum := 0
 
 	for _, line := range lines {
-		newCount := processCard(line, lines)
-
-		for _, v := range newCount {
-			sum += v
-		}
+		sum += processCard(line, lines)
 	}
 
 	return fmt.Sprint(sum)
 }
 
-func processCard(card string, lines []string) map[string]int {
+func processCard(card string, lines []string) int {
 	cards := strings.Split(card, ": ")
 	id, _ := strconv.Atoi(strings.Fields(cards[0])[1])
 	allnums := strings.Split(cards[1], " | ")
 
-	cardCount := map[string]int{
-		strconv.Itoa(id): 1,
-	}
+	cardCount := 1
 
 	winning := strings.Fields(allnums[0])
 	mynums := strings.Fields(allnums[1])
 
-	count := 0
+	count := id
 
 	for _, num := range mynums {
 		if slices.Contains(winning, num) {
+			cardCount += processCard(lines[count], lines)
 			count++
-		}
-	}
-
-	for i := id; i < count+id; i++ {
-		newCount := processCard(lines[i], lines)
-
-		for k, v := range newCount {
-			cardCount[k] += v
 		}
 	}
 
