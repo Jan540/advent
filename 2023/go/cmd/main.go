@@ -10,6 +10,7 @@ import (
 	"advent/pkg/day2"
 	"advent/pkg/day3"
 	"advent/pkg/day4"
+	"advent/pkg/day5"
 )
 
 func main() {
@@ -58,6 +59,14 @@ func main() {
 			result = day4.SolveProblem1(lines)
 		case 2:
 			result = day4.SolveProblem2(lines)
+		}
+
+	case 5:
+		switch *problemPtr {
+		case 1:
+			result = day5.SolveProblem1(lines)
+			// case 2:
+			// 	result = day5.SolveProblem2(lines)
 		}
 	default:
 		result = "Invalid day number"
