@@ -2,6 +2,7 @@ package day5
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 	"unicode"
@@ -9,9 +10,8 @@ import (
 
 func SolveProblem1(lines []string) string {
 	seeds := strings.Split(strings.Split(lines[0], ": ")[1], " ")
-	locations := make([]int, len(seeds))
+	lowest := math.MaxInt64
 
-	// convert seeds to []int
 	for _, seedStr := range seeds {
 		seed, err := strconv.Atoi(seedStr)
 
@@ -20,26 +20,35 @@ func SolveProblem1(lines []string) string {
 		}
 
 		num := seed
+		found := false
 
-		for i, line := range lines[2:] {
+		for _, line := range lines[3:] {
 
-			if line == "" || unicode.IsDigit(rune(line[0])) {
-				lines = lines[i+2:]
+			if line == "" || !unicode.IsDigit(rune(line[0])) {
+				found = false
+				continue
+			}
+
+			if found {
 				continue
 			}
 
 			args := strings.Fields(line)
+
 			destStart, _ := strconv.Atoi(args[0])
 			srcStart, _ := strconv.Atoi(args[1])
 			rng, _ := strconv.Atoi(args[2])
 
 			if num >= srcStart && num < srcStart+rng {
 				num = destStart + (num - srcStart)
+				found = true
 			}
 		}
 
-		locations = append(locations, num)
+		if num < lowest {
+			lowest = num
+		}
 	}
 
-	return fmt.Sprint(locations)
+	return fmt.Sprint(lowest)
 }
