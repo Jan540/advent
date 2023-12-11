@@ -21,7 +21,7 @@ func main() {
 	problemPtr := flag.Int("problem", 1, "problem to run")
 	flag.Parse()
 
-	file, err := os.ReadFile(fmt.Sprintf("/home/jan/advent/2023/go/in/day%d.in", *dayPtr))
+	file, err := os.ReadFile(fmt.Sprintf("/home/jan/projects/advent/2023/go/in/day%d.in", *dayPtr))
 
 	if err != nil {
 		panic(err)
@@ -40,6 +40,7 @@ func main() {
 		case 2:
 			result = day1.SolveProblem2(lines)
 		}
+
 	case 2:
 		switch *problemPtr {
 		case 1:
@@ -55,6 +56,7 @@ func main() {
 		case 2:
 			result = day3.SolveProblem2(lines)
 		}
+
 	case 4:
 		switch *problemPtr {
 		case 1:
@@ -70,6 +72,7 @@ func main() {
 		case 2:
 			result = day5.SolveProblem2(lines)
 		}
+
 	case 6:
 		switch *problemPtr {
 		case 1:
@@ -77,6 +80,7 @@ func main() {
 		case 2:
 			result = day6.SolveProblem2(lines)
 		}
+
 	case 7:
 		switch *problemPtr {
 		case 1:
