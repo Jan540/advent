@@ -21,7 +21,7 @@ func main() {
 	problemPtr := flag.Int("problem", 1, "problem to run")
 	flag.Parse()
 
-	file, err := os.ReadFile(fmt.Sprintf("/home/jan/projects/advent/2023/go/in/day%d.in", *dayPtr))
+	file, err := os.ReadFile(fmt.Sprintf("/home/jan/advent/2023/go/in/day%d.in", *dayPtr))
 
 	if err != nil {
 		panic(err)

@@ -2,6 +2,7 @@ package day5
 
 import (
 	"fmt"
+	"math"
 	"slices"
 	"sort"
 	"strconv"
@@ -94,37 +95,59 @@ func SolveProblem2(lines []string) string {
 		}
 	}
 
-	// lowest := math.MaxInt64
+	fmt.Println(maps, highestValuePossible)
 
-	// for _, seed := range seeds {
-	// 	fmt.Printf("starting %v\n", seed)
+	lowest := math.MaxInt64
 
-	// 	remaining := seed.length
-	// 	start := seed.start
+	for _, seed := range seeds {
+		fmt.Printf("starting %v\n", seed)
 
-	// 	for remaining > 0 {
-	// 		startLocation, consumed := walk(start, remaining, "seed", maps)
+		remaining := seed.length
+		start := seed.start
 
-	// 		remaining -= consumed
-	// 		start += consumed
+		for remaining > 0 {
+			startLocation, consumed := walk(start, remaining, "seed", maps)
 
-	// 		if consumed > 1 {
-	// 			fmt.Printf("consumed %v\n", consumed)
-	// 		}
+			remaining -= consumed
+			start += consumed
 
-	// 		if startLocation < lowest {
-	// 			lowest = startLocation
-	// 		}
-	// 	}
+			if consumed > 1 {
+				fmt.Printf("consumed %v\n", consumed)
+			}
 
-	// 	fmt.Printf("finished %v\n", seed)
-	// }
+			if startLocation < lowest {
+				lowest = startLocation
+			}
+		}
 
-	return fmt.Sprint(maps["soil"])
+		fmt.Printf("finished %v\n", seed)
+	}
+
+	return fmt.Sprint(lowest)
 }
 
-func walk(start, remaining int, s string, maps map[string][]Range) {
-	panic("unimplemented")
+func walk(value, rng int, name string, maps map[string]Map) (int, int) {
+	if _, ok := maps[name]; !ok {
+		return value, rng
+	}
+
+	item := maps[name]
+
+	for _, rngItem := range item.ranges {
+		if rngItem.src <= value && rngItem.src+rngItem.rng > value {
+			diff := value - rngItem.src
+			newValue := rngItem.dest + diff
+
+			return walk(
+				newValue,
+				min(rng, rngItem.rng-diff),
+				item.to,
+				maps,
+			)
+		}
+	}
+
+	return walk(value, 1, item.to, maps)
 }
 
 func createRange(line string) Range {
